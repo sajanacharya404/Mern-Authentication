@@ -47,12 +47,13 @@ const Header = () => {
         <div>
           {userInfo ? (
             <>
-              <div class="dropdown">
-                <button class="dropbtn">welcome {userInfo.name}</button>
-                <div class="dropdown-content">
+              <div className="dropdown">
+                <button className="dropbtn">welcome {userInfo.name}</button>
+                <div className="dropdown-content">
                   <div onClick={logoutHandler} style={{ cursor: "pointer" }}>
                     Logout
                   </div>
+                  <div style={{ cursor: "pointer" }}>Profile</div>
                 </div>
               </div>
             </>
