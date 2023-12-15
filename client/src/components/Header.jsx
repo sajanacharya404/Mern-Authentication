@@ -1,10 +1,24 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import { useLogoutMutation } from "../slices/userApiSlice";
+import { logout } from "../slices/authSlice";
+import "./styles/Header.css";
 
 const Header = () => {
   const { userInfo } = useSelector((state) => state.auth);
-  console.log(userInfo.name);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [logoutApiCall] = useLogoutMutation();
+  const logoutHandler = async () => {
+    try {
+      await logoutApiCall().unwrap();
+      dispatch(logout());
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <>
       <div
@@ -14,6 +28,7 @@ const Header = () => {
           justifyContent: "space-between",
           backgroundColor: "#5fe6ed",
           padding: "10px",
+          height: "10vh",
         }}
       >
         <div>
@@ -32,12 +47,40 @@ const Header = () => {
         <div>
           {userInfo ? (
             <>
-              <p>Welcome {userInfo.name}</p>
+              <div class="dropdown">
+                <button class="dropbtn">welcome {userInfo.name}</button>
+                <div class="dropdown-content">
+                  <div onClick={logoutHandler} style={{ cursor: "pointer" }}>
+                    Logout
+                  </div>
+                </div>
+              </div>
             </>
           ) : (
             <>
-              <Link to={"/login"}>Login</Link>
-              <Link to={"/register"}>Register</Link>
+              <Link
+                to={"/login"}
+                style={{
+                  listStyle: "none",
+                  textDecoration: "none",
+                  color: "Black",
+                  fontSize: "20px",
+                  marginRight: "10px",
+                }}
+              >
+                Login
+              </Link>
+              <Link
+                to={"/register"}
+                style={{
+                  listStyle: "none",
+                  textDecoration: "none",
+                  color: "Black",
+                  fontSize: "20px",
+                }}
+              >
+                Register
+              </Link>
             </>
           )}
         </div>

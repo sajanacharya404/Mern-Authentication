@@ -13,43 +13,61 @@ const RegisterScreen = () => {
 
   return (
     <>
-      <h1>Register</h1>
       <div
         style={{
-          width: "500px",
           display: "flex",
           flexDirection: "column",
-
-          justifyContent: "space-between",
-          alignItems: "center",
+          height: "90vh",
+          width: "100%",
         }}
       >
-        <form action="" onSubmit={submitHandler}>
+        <h1>Register</h1>
+        <form
+          action=""
+          onSubmit={submitHandler}
+          style={{
+            display: "flex",
+            justifyContent: "space-evenly",
+            alignItems: "center",
+            flexDirection: "column",
+
+            height: "40vh",
+          }}
+        >
           <input
             type="email"
             placeholder="Enter Name"
             value={name}
             onChange={(e) => setName(e.target.value)}
+            style={{ padding: "10px", borderRadius: "20px" }}
           />
           <input
             type="email"
             placeholder="Enter Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            style={{ padding: "10px", borderRadius: "20px" }}
           />
           <input
             type="Pasword"
             placeholder="Enter Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            style={{ padding: "10px", borderRadius: "20px" }}
           />
           <input
             type="email"
             placeholder="Enter Password"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
+            style={{ padding: "10px", borderRadius: "20px" }}
           />
-          <button type="submit">Submit</button>
+          <button
+            type="submit"
+            style={{ padding: "10px", borderRadius: "20px", border: "none" }}
+          >
+            Submit
+          </button>
           <p>
             Already have an account ? <Link to={"/login"}>Login Here</Link>
           </p>

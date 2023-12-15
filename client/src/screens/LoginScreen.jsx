@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useLoginMutation } from "../slices/userApiSlice";
 import { setCredentials } from "../slices/authSlice";
 import { toast } from "react-toastify";
+import Loader from "../components/Loader";
 
 const LoginScreen = () => {
   const [email, setEmail] = useState("");
@@ -26,6 +27,7 @@ const LoginScreen = () => {
     try {
       const res = await login({ email, password }).unwrap();
       dispatch(setCredentials({ ...res }));
+      toast("Login successfully");
       navigate("/");
     } catch (err) {
       toast.error(err?.data?.message || err.error);
@@ -33,26 +35,51 @@ const LoginScreen = () => {
   };
   return (
     <>
-      <h1>Login</h1>
-      <div>
-        <form action="" onSubmit={submitHandler}>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          height: "90vh",
+          width: "100%",
+        }}
+      >
+        <h1>Login</h1>
+        <form
+          action=""
+          onSubmit={submitHandler}
+          style={{
+            display: "flex",
+            justifyContent: "space-evenly",
+            flexDirection: "column",
+            alignItems: "center",
+            height: "40vh",
+          }}
+        >
           <input
             type="email"
             placeholder="Enter email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            style={{ padding: "10px", borderRadius: "20px" }}
           />
           <input
             type="Pasword"
             placeholder="Enter password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            style={{ padding: "10px", borderRadius: "20px" }}
           />
-          <button type="submit">Submit</button>
+          {isLoading && <Loader />}
+          <button
+            type="submit"
+            style={{ padding: "10px", borderRadius: "20px", border: "none" }}
+          >
+            SignIn
+          </button>
+          <p>
+            Not Register ? <Link to={"/register"}>Register Here</Link>
+          </p>
         </form>
-        <p>
-          Not Register ? <Link to={"/register"}>Register Here</Link>
-        </p>
       </div>
     </>
   );
