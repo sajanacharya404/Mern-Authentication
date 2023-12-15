@@ -1,33 +1,48 @@
-import { Navbar, Nav, Container } from "react-bootstrap";
-import { LinkContainer } from "react-router-bootstrap";
-import { FaSignInAlt, FaSignOutAlt } from "react-icons/fa";
+import React from "react";
+import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 
 const Header = () => {
+  const { userInfo } = useSelector((state) => state.auth);
+  console.log(userInfo.name);
   return (
-    <header>
-      <Navbar bg="dark" variant="dark" expand="lg" collapseOnSelect>
-        <Container>
-          <LinkContainer to="/">
-            <Navbar.Brand>MERN App</Navbar.Brand>
-          </LinkContainer>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="ms-auto">
-              <LinkContainer to="/login">
-                <Nav.Link>
-                  <FaSignInAlt /> Sign In
-                </Nav.Link>
-              </LinkContainer>
-              <LinkContainer to="/register">
-                <Nav.Link>
-                  <FaSignOutAlt /> Sign Up
-                </Nav.Link>
-              </LinkContainer>
-            </Nav>
-          </Navbar.Collapse>
-        </Container>
-      </Navbar>
-    </header>
+    <>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          backgroundColor: "#5fe6ed",
+          padding: "10px",
+        }}
+      >
+        <div>
+          <Link
+            to={"/"}
+            style={{
+              listStyle: "none",
+              textDecoration: "none",
+              color: "Black",
+              fontSize: "20px",
+            }}
+          >
+            MernAuth
+          </Link>
+        </div>
+        <div>
+          {userInfo ? (
+            <>
+              <p>Welcome {userInfo.name}</p>
+            </>
+          ) : (
+            <>
+              <Link to={"/login"}>Login</Link>
+              <Link to={"/register"}>Register</Link>
+            </>
+          )}
+        </div>
+      </div>
+    </>
   );
 };
 

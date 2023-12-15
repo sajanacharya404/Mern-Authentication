@@ -1,8 +1,20 @@
 import React from "react";
-import Hero from "../components/Hero";
 
 const HomeScreen = () => {
-  return <Hero />;
+  return (
+    <>
+      <h1
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        {" "}
+        Homepage{" "}
+      </h1>
+    </>
+  );
 };
 
 export default HomeScreen;
