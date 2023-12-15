@@ -99,7 +99,7 @@ const RegisterScreen = () => {
           />
           <input
             type="password"
-            placeholder="Enter Password"
+            placeholder="Confirm Password"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
             style={{ padding: "10px", borderRadius: "20px" }}

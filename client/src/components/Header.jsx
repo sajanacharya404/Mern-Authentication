@@ -53,7 +53,9 @@ const Header = () => {
                   <div onClick={logoutHandler} style={{ cursor: "pointer" }}>
                     Logout
                   </div>
-                  <div style={{ cursor: "pointer" }}>Profile</div>
+                  <div style={{ cursor: "pointer" }}>
+                    <Link to={"/profile"}>Profile</Link>
+                  </div>
                 </div>
               </div>
             </>
